@@ -1,8 +1,6 @@
 const { app, BrowserWindow, protocol, ipcMain, Menu, webContents, clipboard, shell, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { ElectronBlocker } = require('@ghostery/adblocker-electron');
-const fetch = require('cross-fetch'); // required 'fetch'
 
 function createWindow() {
 
@@ -32,6 +30,9 @@ function createWindow() {
 	}
 	if (pathname === "gary") {
 		return callback({ data: fs.readFileSync(path.join(__dirname, 'Gary64.jpg')), mimeType: 'image/jpeg' });
+	}
+	if (pathname === "goober") {
+		return callback({ data: fs.readFileSync(path.join(__dirname, 'Goober18.jpg')), mimeType: 'image/jpeg' });
 	}
 	if (pathname === 'settings') {
 	  return callback({ data: new Buffer.from('placeholder'), mimeType: 'text/html' });

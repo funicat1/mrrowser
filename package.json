@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "author": "funicat",
   "license": "MIT",
-  "productName": "Mrrowser",
   "main": "main.js",
   "type": "commonjs",
   "scripts": {

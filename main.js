@@ -67,6 +67,8 @@ function createWindow() {
 		  { label: 'New Tab', click: () => win.webContents.send('window-open', { "url": 'meow://newtab' }) },
 		  { label: 'Settings', click: () => win.webContents.send('window-open', { "url": 'meow://settings' }) },
 		  { label: 'About', click: () => win.webContents.send('window-open', { "url": 'meow://about' }) },
+		  { label: 'Gary', click: () => win.webContents.send('window-open', { "url": 'meow://gary' }) },
+		  { label: 'Goober', click: () => win.webContents.send('window-open', { "url": 'meow://goober' }) },
 		  { label: 'Devtools', click: () => win.webContents.send('devtools') },
 		  
 		  { type: 'separator' },

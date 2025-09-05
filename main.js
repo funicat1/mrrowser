@@ -30,6 +30,9 @@ function createWindow() {
 	if (pathname === 'about') {
 	  return callback({ data: fs.readFileSync(path.join(__dirname, 'about', 'index.html')), mimeType: 'text/html' });
 	}
+	if (pathname === "gary") {
+		return callback({ data: fs.readFileSync(path.join(__dirname, 'Gary64.jpg')), mimeType: 'image/jpeg' });
+	}
 	if (pathname === 'settings') {
 	  return callback({ data: new Buffer.from('placeholder'), mimeType: 'text/html' });
 	}

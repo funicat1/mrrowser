@@ -4,23 +4,56 @@
   "main": "main.js",
   "type": "commonjs",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "build": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
   "devDependencies": {
-    "electron": "^26.0.0"
+    "electron": "^26.0.0",
+    "@electron-forge/cli": "^6.3.0",
+    "@electron-forge/maker-deb": "^6.3.0",
+    "@electron-forge/maker-rpm": "^6.3.0",
+    "@electron-forge/maker-squirrel": "^6.3.0",
+    "@electron-forge/maker-zip": "^6.3.0",
+    "@electron-forge/maker-appimage": "^6.3.0",
+    "@electron-forge/maker-nsis": "^6.3.0"
   },
   "dependencies": {
     "cross-fetch": "^4.1.0",
     "electron-context-menu": "^4.1.1"
   },
-  "build": {
-    "appId": "com.funicat.mrrowser",
-    "productName": "Mrrowser",
-    "win": {
-      "target": ["nsis", "portable"]
-    },
-    "linux": {
-      "target": ["AppImage", "deb"]
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icon.png"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "mrrowser"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": ["darwin"]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-appimage",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-nsis",
+          "config": {}
+        }
+      ]
     }
   }
 }

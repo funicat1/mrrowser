@@ -141,20 +141,6 @@ function createWindow() {
 	  });
   });
   win.loadFile('assets/index.html');
-  fetch('https://easylist.to/easylist/easylist.txt')
-  .then(response => response.text())
-  .then(text => {
-    const blocker = ElectronBlocker.parse(text);
-    blocker.enableBlockingInSession(win.webContents.session);
-    
-    // 可选：记录被阻止的请求
-    blocker.on('request-blocked', (request) => {
-      console.log(`Blocked ${request.url}`);
-    });
-  })
-  .catch(error => {
-    console.error('Error loading EasyList:', error);
-  });
 
 }
 

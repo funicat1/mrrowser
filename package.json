@@ -1,0 +1,17 @@
+{
+  "name": "mrrowser",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type":"commonjs",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^26.0.0"
+  },
+  "dependencies": {
+    "@ghostery/adblocker-electron": "^2.11.6",
+    "cross-fetch": "^4.1.0",
+    "electron-context-menu": "^4.1.1"
+  }
+}

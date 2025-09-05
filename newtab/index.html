@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>New tab</title>
+  <style>
+	@font-face {
+		font-family: ProductSans;
+		src: url('/productsans.ttf');
+	}
+	:root{--accent:#007ef3;--bg:#071027;--card:rgba(255,255,255,0.04);--radius:12px}
+	*{box-sizing:border-box}
+	html,body{height:100%;margin:0;font-family:Inter,system-ui,Roboto,Arial;color:#e6eef8;background:linear-gradient(180deg,#031020,#071027);-webkit-font-smoothing:antialiased}
+
+	.center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:24px}
+	.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;user-select:none;}
+	.brand .title{font-weight:700;font-size:64px;font-family: ProductSans;}
+
+	.search{width:100%;max-width:800px;display:flex;gap:10px;align-items:center}
+	.searchbox{flex:1;background:var(--card);border-radius:14px;padding:13px 15px;display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.03)}
+	.searchbox input{flex:1;background:transparent;border:0;color:inherit;font-size:20px;outline:0}
+	.searchbtn{background:var(--accent);border:0;padding:14px 20px;border-radius:12px;font-weight:700;cursor:pointer}
+
+	.sub{margin-top:14px;color:rgba(230,238,248,0.75);font-size:13px;user-select:none;}
+	.fact-card{margin-top:20px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px;max-width:760px;text-align:center}
+	.fact{font-size:15px}
+	.meta{margin-top:8px;font-size:12px;color:rgba(230,238,248,0.65)}
+
+	input:focus{box-shadow:0 0 0 6px rgba(0,126,243,0.06)}
+
+	@media (max-width:640px){.searchbox input{font-size:16px;padding:12px}.searchbtn{padding:12px}}
+
+	.title1 {color: #3174f1}
+	.title2 {color: #e63125}
+	.title3 {color: #f6ad01}
+	.title4 {color: #249a41}
+	.title5 {color: #e63125}
+	span {
+		display: inline-block;
+		margin: 3px;
+		padding: 0;
+		vertical-align: middle;
+	}
+	svg {
+		vertical-align: middle;
+	}
+  </style>
+</head>
+<body>
+  <main class="center">
+	<div class="brand">
+		<div class="title">
+			<span class="title1">M</span><span class="title1">r</span><span class="title1">r</span><span class="title1"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#3174f1"><path d="M169.86-485Q132-485 106-511.14t-26-64Q80-613 106.14-639t64-26Q208-665 234-638.86t26 64Q260-537 233.86-511t-64 26Zm185-170Q317-655 291-681.14t-26-64Q265-783 291.14-809t64-26Q393-835 419-808.86t26 64Q445-707 418.86-681t-64 26Zm250 0Q567-655 541-681.14t-26-64Q515-783 541.14-809t64-26Q643-835 669-808.86t26 64Q695-707 668.86-681t-64 26Zm185 170Q752-485 726-511.14t-26-64Q700-613 726.14-639t64-26Q828-665 854-638.86t26 64Q880-537 853.86-511t-64 26ZM266-75q-42 0-69-31.53-27-31.52-27-74.47 0-42 25.5-74.5T250-318q22-22 41-46.5t36-50.5q29-44 65-82t88-38q52 0 88.5 38t65.5 83q17 26 35.5 50t40.5 46q29 30 54.5 62.5T790-181q0 42.95-27 74.47Q736-75 694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg></span><span class="title1">w</span><span class="title2">s</span><span class="title3">e</span><span class="title4">r</span>
+		</div>
+	</div>
+
+	<div class="search" role="search" aria-label="google search">
+	  <label class="searchbox" for="q">
+		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden style="opacity:.85"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+		<input id="q" name="q" autocomplete="off" placeholder="search google or type cat things (eg: maine coon)" aria-label="search box" />
+	  </label>
+	</div>
+
+	<div class="sub">press <kbd>ctrl/cmd+k</kbd> to focus search • press <kbd>enter</kbd> to open results</div>
+	<div class="sub">made with ❤ by <kbd>funicat</kbd></div>
+	
+
+  </main>
+
+  <script>
+
+	// search via js to avoid form submission issues
+	function doSearch(){
+	  const q = document.getElementById('q').value.trim();
+	  if(!q) return; // nothing
+	  const url = 'https://www.google.com/search?q=' + encodeURIComponent(q);
+	  location.href = url
+	}
+
+	document.getElementById('q').addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ doSearch(); } });
+	document.getElementById('q').focus()
+
+	// keyboard shortcuts
+	document.addEventListener('keydown', (e)=>{
+	  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); document.getElementById('q').focus(); }
+	});
+
+	// autofocus and init
+	window.addEventListener('load', ()=>{ document.getElementById('q').focus(); });
+  </script>
+</body>
+</html>

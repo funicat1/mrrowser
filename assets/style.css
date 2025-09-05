@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+#tabs {
+  display: flex;
+  background:linear-gradient(90deg,#0e2150,#071027);
+  color: #fff;
+  overflow-x: auto;
+  height: 40px;
+}
+#tabs2 {
+	display: flex;
+}
+.tab {
+  padding: 10px 10px;
+  width: 250px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 10px;
+  margin: 2px;
+  transition-duration: 200ms;
+  position: relative;
+  vertical-align: middle;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.favicon {
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  
+}
+.tab.active {
+  background: #007ef3;
+}
+.tab:hover {
+  background: #75b6f3;
+}
+#webviews {
+  height: calc(100vh - 40px);
+}
+.page {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+webview {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.bar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+
+  background: #007ef3;
+}
+.page.active {
+  display: flex;
+  flex-direction: column;
+}
+#newtab {
+	width: 30px;
+	height: 30px;
+	font-size: 24px;
+	background-color: transparent;
+	transition-duration: 200ms;
+	color: white;
+	cursor: pointer;
+	border: none;
+	border-radius: 50%;
+	margin: 5px;
+}
+#newtab:active {
+	background-color: #ffffff44;
+}
+#newtab:hover {
+	background-color: #ffffff2a;
+}
+.closebtn {
+	position: absolute;
+	right: 5px;
+	vertical-align: middle;
+	height: 32px;
+	width: 32px;
+	border: none;
+	font-size: 16px;
+	border-radius: 50%;
+	top: 3px;
+	background-color: transparent;
+	transition-duration: 200ms;
+	color: white;
+	cursor: pointer;
+}
+.closebtn:active {
+	background-color: #ffffff44;
+}
+.closebtn:hover {
+	background-color: #ffffff2a;
+}
+*:disabled {
+	cursor: not-allowed !important;
+}
+.addressbar {
+	flex-grow: 1;
+	height: 30px;
+	margin: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 100px;
+	border: none;
+	outline: none;
+	background-color: #ffffff56;
+	color: white;
+}
+.roundbutton {
+	width: 36px;
+	height: 36px;
+	font-size: 18px;
+	background-color: transparent;
+	transition-duration: 200ms;
+	color: white;
+	cursor: pointer;
+	border: none;
+	border-radius: 50%;
+	margin: 3px;
+	vertical-align: middle;
+}
+.roundbutton:active:not(:disabled) {
+	background-color: #ffffff44;
+}
+.roundbutton:hover:not(:disabled) {
+	background-color: #ffffff2a;
+}
+.roundbutton:disabled {
+	opacity: .7;
+}
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #555 #333;
+}

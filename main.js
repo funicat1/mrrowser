@@ -1,4 +1,4 @@
-const { app, BrowserWindow, protocol, ipcMain, Menu, webContents, clipboard, shell, dialog } = require('electron');
+const { app, BrowserWindow, protocol, ipcMain, Menu, webContents, clipboard, shell, dialog, nativeTheme  } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -18,6 +18,8 @@ function createWindow() {
 	}
 	}
 	)
+
+	nativeTheme.themeSource = 'dark';
   
   protocol.registerBufferProtocol('meow', (request, callback) => {
 	// request.url will look like "meow://something"

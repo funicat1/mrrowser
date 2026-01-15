@@ -11,6 +11,7 @@ if (fs.existsSync(configfile)) {
 } else {
 	Object.assign(config, {
 		accent: "#00a1ff",
+		enablewindowbuttons: true
 	})
 	fs.writeFileSync(configfile, JSON.stringify(config))
 }
@@ -23,24 +24,57 @@ function writeconfig(key,value) {
 function readconfig(key) {
 	return config[key]
 }
+
+function mixcolor(color1_hex, color2_hex, weight = 50) {
+  // Convert hex to decimal
+  function h2d(h) {
+    return parseInt(h, 16);
+  }
+  // Convert decimal to hex
+  function d2h(d) {
+    return d.toString(16).padStart(2, '0');
+  }
+
+  weight = Math.max(0, Math.min(100, weight)); // Ensure weight is between 0 and 100
+
+  let color = "#";
+  for (let i = 1; i <= 5; i += 2) { // Loop through R, G, B hex pairs
+    const v1 = h2d(color1_hex.substr(i, 2));
+    const v2 = h2d(color2_hex.substr(i, 2));
+
+    // Combine values with weight
+    const val = d2h(Math.floor(v2 + (v1 - v2) * (weight / 100.0)));
+    color += val;
+  }
+  return color;
+}
 function createWindow() {
 
 	const win = new BrowserWindow({
-	width: 1000,
-	height: 700,
-	minHeight: 480,
-	minWidth: 640,
-	autoHideMenuBar: true,
-	icon: path.join(__dirname, 'icon.png'),
-	webPreferences: {
-		nodeIntegration: true,
-		contextIsolation: false,
-		webviewTag: true,
-	}
+		width: 1000,
+		height: 700,
+		minHeight: 380,
+		minWidth: 540,
+		autoHideMenuBar: true,
+		icon: path.join(__dirname, 'icon.png'),
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+			webviewTag: true,
+			
+		},
+		...readconfig("enablewindowbuttons") ? {titleBarStyle: 'hidden',
+		// expose window controls in Windows/Linux
+		titleBarOverlay: {
+			color: mixcolor(readconfig("accent"),"#000000",60),
+			symbolColor: "#fff",
+			height: 40
+		}} : {}
 	}
 	)
 	win.webContents.on('did-finish-load', () => {
 		win.webContents.send('theme:accent', readconfig("accent"))
+		win.webContents.send('theme:enablewindowbuttons', readconfig("enablewindowbuttons"))
 	})
 
 

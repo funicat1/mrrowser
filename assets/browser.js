@@ -306,3 +306,12 @@ ipcRenderer.on('theme:accent', (_, accent) => {
     console.log(accent)
     document.documentElement.style.setProperty('--accent', accent)
 })
+
+ipcRenderer.on('theme:enablewindowbuttons', (_, enablewindowbuttons) => {
+    console.log(enablewindowbuttons)
+    if (enablewindowbuttons) {
+        document.documentElement.style.setProperty('--btnwidth', "250px")
+    } else {
+        document.documentElement.style.setProperty('--btnwidth', "64px")
+    }
+})

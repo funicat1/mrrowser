@@ -5,7 +5,7 @@ body {
 }
 #tabs {
 	display: flex;
-	background:linear-gradient(90deg,color-mix(in srgb, var(--accent), #000000 20%),color-mix(in srgb, var(--accent), #000000 40%));
+	background:color-mix(in srgb, var(--accent), #000000 40%);
 	color: #fff;
 	overflow-x: auto;
 	height: 40px;
@@ -13,6 +13,11 @@ body {
 #tabs2 {
 	display: flex;
 	margin-left: 10px;
+	max-width: calc(100vw - var(--btnwidth));
+}
+#tbar {
+	app-region: drag;
+	flex-grow: 1;
 }
 .tab {
 	padding: 10px 10px;
@@ -38,9 +43,9 @@ body {
 	
 }
 .textcontent {
-	width: calc(100% - 80px);
+	width: calc(100% - 70px);
 	position: absolute;
-	left: 15px;
+	left: 13px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -120,7 +125,7 @@ webview {
 	border-top-right-radius: 8px;
 }
 .page {
-	background:linear-gradient(90deg,color-mix(in srgb, var(--accent), #000000 20%),color-mix(in srgb, var(--accent), #000000 40%));
+	background: color-mix(in srgb, var(--accent), #000000 40%);
 }
 .webv {
   background: var(--accent);

@@ -1,7 +1,9 @@
 
 {
   "name": "mrrowser",
-  "version": "1.0.0",
+  "description": "Web browser built on top of electron made to look like chromium.",
+  "author": "funicat",
+  "version": "0.2.0",
   "main": "main.js",
   "type": "commonjs",
   "scripts": {

@@ -3,6 +3,7 @@ const webviewsEl = document.getElementById('webviews');
 const newtab = document.getElementById('newtab');
 const { ipcRenderer, Menu, MenuItem } = require("electron")
 const fs = require('fs');
+const path = require("node:path")
 
 const webviews = [];
 let selectedTabId = null;
@@ -77,6 +78,7 @@ function createTab(url) {
     const tab = document.createElement('div');
     tab.className = 'tab';
     tab.dataset.id = tabId;
+    
 
     const favicon = document.createElement('img');
     favicon.className = 'favicon';
@@ -84,7 +86,9 @@ function createTab(url) {
     favicon.onerror = () => (favicon.style.display = 'none');
     favicon.onload = () => (favicon.style.display = '');
 
-    tab.textContent = new URL(url).hostname;
+    const textcontent = document.createElement("div")
+    textcontent.classList.add("textcontent")
+    tab.appendChild(textcontent)
     tab.insertBefore(favicon, tab.firstChild);
 
     tab.onclick = () => setActive(tabId);
@@ -96,14 +100,43 @@ function createTab(url) {
     tab.appendChild(closebtn);
 
     tabsEl.appendChild(tab);
+    tab.style.transitionDuration = "0ms"
+    tab.style.width = "0px"
+    tab.style.textOverflow = "clip"
+    tab.style.padding = "0"
+    tab.style.height = "38px"
+    tab.style.overflow = "hidden"
+    tab.style.whiteSpace = "nowrap"
+    tab.style.marginLeft = "0"
+    tab.style.marginRight = "0"
+    requestAnimationFrame(function() {
+        tab.style.transitionDuration = "200ms"
+        tab.style.width = "212px"
+        tab.style.textOverflow = ""
+        tab.style.padding = "10px"
+        tab.style.height = "18px"
+        tab.style.overflow = ""
+        tab.style.whiteSpace = ""
+        tab.style.marginLeft = "10px"
+        tab.style.marginRight = "10px"
+        
+    })
 
     // --- webview container ---
     const wvcontainer = document.createElement('div');
     wvcontainer.classList.add('page', 'webview');
     wvcontainer.dataset.id = tabId;
 
+    
+
     const wv = document.createElement('webview');
+    wv.classList.add("webv")
     wv.src = url;
+    wv.setAttribute(
+    'preload',
+    path.join(__dirname, 'themeloader.js')
+    )
+
 
     const bar = document.createElement('div');
     bar.classList.add('bar');
@@ -135,9 +168,7 @@ function createTab(url) {
     wvcontainer.append(bar, wv);
     hasanicon = false;
     wv.addEventListener('page-title-updated', () => {
-        tab.textContent = wv.getTitle();
-        tab.insertBefore(favicon, tab.firstChild);
-        tab.appendChild(closebtn);
+        textcontent.textContent = wv.getTitle();
     });
     wv.addEventListener('close', () => {
         closeTab(tabId);
@@ -187,6 +218,8 @@ function createTab(url) {
         const id = wv.getWebContentsId();  // this works in renderer
         ipcRenderer.send('register-webview-context-menu', id);
         ipcRenderer.send('register-window-open', id);
+        ipcRenderer.send('webview-request-accent', id)
+        
     });
     const etcbutton = document.createElement('button');
     etcbutton.classList.add('roundbutton');
@@ -211,7 +244,20 @@ function setActive(id) {
 function closeTab(id) {
     // remove tab element
     const tab = Array.from(tabsEl.children).find(t => t.dataset.id === id);
-    if (tab) tab.remove();
+    if (tab) {
+        // activate animation
+        tab.style.width = "0px"
+        tab.style.textOverflow = "clip"
+        tab.style.padding = "0"
+        tab.style.height = "38px"
+        tab.style.overflow = "hidden"
+        tab.style.whiteSpace = "nowrap"
+        tab.style.marginLeft = "0"
+        tab.style.marginRight = "0"
+        setTimeout(function() {
+            tab.remove()
+        },200)
+    };
 
     // find index
     const idx = webviews.findIndex(w => w.id === id);
@@ -255,3 +301,8 @@ createTab('meow://newtab');
 newtab.onclick = () => {
     createTab('meow://newtab');
 };
+
+ipcRenderer.on('theme:accent', (_, accent) => {
+    console.log(accent)
+    document.documentElement.style.setProperty('--accent', accent)
+})

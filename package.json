@@ -1,52 +1,19 @@
 {
   "name": "mrrowser",
-  "description": "Mrrowser is a free, openS browser, without bloat.",
   "version": "1.0.0",
-  "author": "funicat",
-  "license": "MIT",
   "main": "main.js",
   "type": "commonjs",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "build": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "devDependencies": {
     "electron": "^26.0.0",
-    "@electron-forge/cli": "^6.3.0",
-    "@electron-forge/maker-deb": "^6.3.0",
-    "@electron-forge/maker-rpm": "^6.3.0",
-    "@electron-forge/maker-squirrel": "^6.3.0",
-    "@electron-forge/maker-zip": "^6.3.0"
+    "electron-builder": "^24.0.0"
   },
   "dependencies": {
     "cross-fetch": "^4.1.0",
-    "electron-context-menu": "^4.1.1"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "assets/icon.png"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "mrrowser"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": ["darwin"]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        }
-      ]
-    }
+    "electron-context-menu": "^4.1.1",
+    "mime-types": "^3.0.2"
   }
 }

@@ -6,6 +6,7 @@
   "version": "0.2.0",
   "main": "main.js",
   "type": "commonjs",
+  "license": "i have no idea",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",

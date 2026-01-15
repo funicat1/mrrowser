@@ -54,8 +54,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: "Build ${{ steps.date.outputs.date }}"
-          body: "Automated build from commit ${{ github.sha }}"
+          name: "v0.2"
+          body: "Automated mrrow from commit ${{ github.sha }}"
+          tag_name: "v0.2.0"
           draft: false
           prerelease: true
           files: artifacts/**/*

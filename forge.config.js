@@ -1,12 +1,10 @@
 
+
 module.exports = {
   packagerConfig: {
     name: 'Mrrowser',
     executableName: 'mrrowser',
     icon: './icon.png',
-    extraResource: [
-      './config.json'
-    ],
     asar: true,
   },
   rebuildConfig: {},
@@ -47,3 +45,4 @@ module.exports = {
     },
   ],
 };
+

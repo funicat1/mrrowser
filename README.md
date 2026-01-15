@@ -13,3 +13,7 @@ cd mrrowser
 npm install
 npm start
 ```
+
+## How to build
+
+idk man
